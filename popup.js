@@ -1,10 +1,22 @@
-let changeColor = document.getElementById("changeColor");
+let Trigger = document.getElementById("trigger");
 
 chrome.storage.sync.get("color", ({ color }) => {
     changeColor.style.backgroundColor = color;
 });
 
-changeColor.addEventListener("click", async () => {
+// Trigger.addEventListener("click", async () => {
+//     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+//     chrome.scripting.executeScript({
+//         target: { tabId: tab.id },
+//         function: alter,
+//     });
+// });
+
+
+//triggering when page loaded
+document.addEventListener("DOMContentLoaded",async ()=> {
+  
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     chrome.scripting.executeScript({
@@ -13,13 +25,40 @@ changeColor.addEventListener("click", async () => {
     });
 });
 
-async function alter() {
-    while (true) {
-        document.body.style.backgroundColor = "yellow";
-        let string = document.body;
-        console.log(string);
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        document.body.style.backgroundColor = "green";
-        await new Promise(resolve => setTimeout(resolve, 2000));
+
+
+
+function alter() {
+    
+    var isOpen=true;
+
+    function toggleActivies(){
+        isOpen = !isOpen;
+
+        var activity= document.getElementsByClassName("VfPpkd-Bz112c-LgbsSe yHy1rc eT1oJ JsuyRc boDUxc");
+        console.log(activity[3]);
+        activity[3].click();
+      
     }
+
+
+    function togglePoll (){
+       if(isOpen){
+        var polls= document.getElementsByClassName("rHLKYe  VfPpkd-StrnGf-rymPhb-ibnC6b VfPpkd-rymPhb-ibnC6b-OWXEXe-tPcied-hXIJHe");
+        console.log(polls[1]);
+        polls[1].click();
+       }
+    }
+
+    function fetchPolls (){
+        var pollList = document.getElementsByClassName("BE3Wmf");
+        console.log(pollList);
+        console.log(pollList[0]["innerText"]);
+    }
+
+    // toggleActivies();
+    // togglePoll();
+    fetchPolls();
+   
+    // setInterval(printSource,2000);
 }
