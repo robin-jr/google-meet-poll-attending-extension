@@ -1,6 +1,6 @@
 {
-    "name": "Getting Started Example",
-    "description": "Build an Extension!",
+    "name": "Poll Attender",
+    "description": "Attend the google meet polls automatically",
     "version": "1.0",
     "manifest_version": 3,
     "background": {
