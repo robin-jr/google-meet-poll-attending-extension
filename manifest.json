@@ -16,7 +16,7 @@
               "windows": "Ctrl+q",
               "mac": "Command+q",
               "chromeos": "Ctrl+q",
-              "linux": "Ctrl+q"
+              "linux": "Ctrl+b"
             }
           }
     }
