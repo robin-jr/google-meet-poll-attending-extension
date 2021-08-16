@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function attendPolls() {
     var attended = [];
     const DELAY = 2000; //2 seconds
+    const MIN_MEMBERS = 15;
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -62,21 +63,21 @@ async function attendPolls() {
         }
     }
 
-    //auto exit impleimentation
+    //auto exit impleimentation (TODO)
 
-    function checkTime(){
+    function checkTime() {
         var d = new Date();
         var currtime = d.getHours() * 100 + d.getMinutes();
         // now your currtime looks like 530 if it's 5.30am, or 1730 if it's 5.30 pm
         // you can just do a simple comparison between ints
 
-        console.log("time",currtime);
+        console.log("time", currtime);
 
-        if ((currtime > 9040 && currtime < 9050)||
-            (currtime > 1040 && currtime < 1050)||
-            (currtime > 1150 && currtime < 1210)||
-            (currtime > 1250 && currtime < 1310)||
-            (currtime > 1450 && currtime < 1510)){
+        if ((currtime > 9040 && currtime < 9050) ||
+            (currtime > 1040 && currtime < 1050) ||
+            (currtime > 1150 && currtime < 1210) ||
+            (currtime > 1250 && currtime < 1310) ||
+            (currtime > 1450 && currtime < 1510)) {
             // closed between 20:00 (8 pm) and 8:00 (8 am) as an example
 
             // console.log("true");
@@ -86,39 +87,35 @@ async function attendPolls() {
         return false;
     }
 
-    function checkCount (){
-        let peopleCount = document.getElementsByClassName("uGOf1d");
-        // console.log("count -->",peopleCount[0]["innerText"]);
-        var b = parseInt(peopleCount[0]["innerText"]);
-        console.log("count int->",b);
-
-        return (b<20);
-
+    function getCount() {
+        const peopleCount = document.getElementsByClassName("uGOf1d");
+        var count = parseInt(peopleCount[0]["innerText"]);
+        console.log("total members ->", count);
+        return count;
     }
 
-    function checkPeople(){
-        if(currtime() && checkCount()){
-            var endBtn = document.getElementsByClassName("VfPpkd-Bz112c-LgbsSe yHy1rc eT1oJ tWDL4c jh0Tpd Gt6sbf QQrMi ftJPW");
-            // console.log(endBtn[0]);
-            endBtn[0].click();
-            console.log("meet Ended");
-        }
+    function endClass() {
+        var endBtn = document.getElementsByClassName("VfPpkd-Bz112c-LgbsSe yHy1rc eT1oJ tWDL4c jh0Tpd");
+        endBtn[0].click();
+        console.log("Ended Call");
     }
-
-
-
 
     toggleActivies();
     await sleep(1000);
     togglePoll();
     await sleep(1000);
 
-    setInterval(checkPeople,5000);
-    
+
     while (true) {
+        let count = getCount();
+        if (count < MIN_MEMBERS) {
+            endClass();
+            return;
+        }
+        await sleep(500);
         fetchPolls();
-        console.log("sleeping ", DELAY, "ms");
-        console.log("attended: ", attended);
+        console.log("Sleeping ", DELAY, "ms");
+        console.log("Attended Polls: ", attended);
         await sleep(DELAY);
     }
 
