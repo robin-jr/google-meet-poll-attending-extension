@@ -18,3 +18,9 @@ Ta-da! The extension has been successfully installed.
 - Make sure this is the only active tab open in the current browser window, and is running in the foreground for the extension to work
 
 That's it! The extension will automatically attend the polls (a random option among the given) and also will end the call by itself once the population is less than 20. (You can customize this if you want inside the code)
+
+## Disclaimer
+
+Don't use this project to automate your classes. See this project only as a way of understanding how automation works and how it can even be implemented in your day to day life. I will never promote anyone to use this for attending online classes nor use it myself.
+
+Classes are important and respect your teachers 🙂.
