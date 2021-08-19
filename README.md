@@ -15,6 +15,6 @@ Ta-da! The extension has been successfully installed.
 ## Using the extension
 
 - Once you are in a meeting (meet.google.com/whatever), click on the extension to enable it
+- Make sure this is the only active tab open in the current browser window, and is running in the foreground for the extension to work
 
-That's it! The extension will automatically attend the polls (a random option among the given) and also will end the call by itself once the population is less than 20.
- (You can customize this if you want inside the code)
+That's it! The extension will automatically attend the polls (a random option among the given) and also will end the call by itself once the population is less than 20. (You can customize this if you want inside the code)
